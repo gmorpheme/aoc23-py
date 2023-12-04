@@ -37,10 +37,13 @@ game_regex = re.compile(r'Game (\d+): (.*)')
 
 class Game:
     def __init__(self, text):
-        id, evidence = game_regex.match(text).groups()
-        self.id = id
-        self.evidence = list(map(to_rgb, evidence.split(';')))
-        self.minimums = reduce(upper, self.evidence)
+        if m := game_regex.match(text):
+            id, evidence = m.groups()
+            self.id = id
+            self.evidence = list(map(to_rgb, evidence.split(';')))
+            self.minimums = reduce(upper, self.evidence)
+        else:
+            raise ValueError('bad game description')
 
     def __str__(self):
         return f'GAME: {self.id} MINIMUMS: {self.minimums}'
