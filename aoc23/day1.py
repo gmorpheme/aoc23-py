@@ -1,12 +1,14 @@
 import re
 
-def process_line_a(line): 
+
+def process_line_a(line):
     digits = list(filter(lambda c: c.isdigit(), line))
 
     first = int(digits[0])
     last = int(digits[-1])
 
     return first * 10 + last
+
 
 def day1a(lines):
     """
@@ -15,10 +17,11 @@ def day1a(lines):
     """
     return sum([process_line_a(line) for line in lines])
 
+
 digit_matcher = re.compile("one|two|three|four|five|six|seven|eight|nine|[0-9]")
 
-def day1b_digit_strings(line):
 
+def day1b_digit_strings(line):
     digit_matches = []
     for i in range(0, len(line)):
         m = digit_matcher.match(line[i:])
@@ -26,8 +29,8 @@ def day1b_digit_strings(line):
             digit_matches.append(m.group(0))
     return digit_matches
 
-def day1b_to_number(word):
 
+def day1b_to_number(word):
     match word:
         case "one":
             return 1
@@ -50,6 +53,7 @@ def day1b_to_number(word):
         case other:
             return int(other[0])
 
+
 def process_line_b(line):
     digits = day1b_digit_strings(line)
 
@@ -58,6 +62,7 @@ def process_line_b(line):
 
     return first * 10 + last
 
+
 def day1b(lines):
     """
     >>> day1b(['two1nine','eightwothree','abcone2threexyz','xtwone3four','4nineeightseven2','zoneight234','7pqrstsixteen'])
@@ -65,10 +70,12 @@ def day1b(lines):
     """
     return sum([process_line_b(line) for line in lines])
 
-def main():
-    lines = list(open('data/day1input.txt'))
-    print(f'Day 1a: {day1a(lines)}')
-    print(f'Day 1b: {day1b(lines)}')
 
-if __name__ == '__main__':
+def main():
+    lines = list(open("data/day1input.txt"))
+    print(f"Day 1a: {day1a(lines)}")
+    print(f"Day 1b: {day1b(lines)}")
+
+
+if __name__ == "__main__":
     main()
