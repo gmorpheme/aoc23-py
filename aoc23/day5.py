@@ -85,10 +85,6 @@ class RangeMapping:
         self.perturbations = perturbations
 
     def __call__(self, input) -> int:
-        """
-        >>> RangeMapping(iter(['50 98 2', '52 50 48', '']))(79)
-        81
-        """
         for p in self.perturbations:
             if input in p.range:
                 return p(input)
