@@ -84,7 +84,7 @@ def day2b(lines):
 
 
 def main():
-    lines = list(open('data/day2input.txt'))
+    lines = list(open('aoc23/data/day2input.txt'))
     print(f'Day 2a: {day2a(lines)}')
     print(f'Day 2b: {day2b(lines)}')
 
