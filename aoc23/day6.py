@@ -1,4 +1,4 @@
-from typing import NamedTuple
+from typing import NamedTuple, Tuple
 from math import sqrt, pow, ceil, floor
 from functools import reduce
 from operator import mul
@@ -10,38 +10,35 @@ class Race(NamedTuple):
     time: int
     distance: int
 
-    def roots(self):
+    def roots(self) -> Tuple[float, float]:
         # roots of c(t - c) = d => -t ± sqrt(t^2 - 4d)  / -2
         disc = sqrt(pow(self.time, 2) - (4 * self.distance))
         root_a = (-self.time + disc) / -2
         root_b = (-self.time - disc) / -2
         return (root_a, root_b)
 
-    def winning_range(self):
+    def winning_range(self) -> range:
         l, r = self.roots()
         return range(floor(l + 1), ceil(r))
-
-    def __repr__(self):
-        return f'<Race({self.time}, {self.distance})>'
 
 
 class Puzzle(NamedTuple):
     races: list[Race]
 
     @staticmethod
-    def parse_a(lines):
+    def parse_a(lines: list[str]):
         times = [int(t) for t in lines[0].split(':')[1].split()]
         distances = [int(t) for t in lines[1].split(':')[1].split()]
         return Puzzle([Race(*t) for t in zip(times, distances)])
 
     @staticmethod
-    def parse_b(lines):
+    def parse_b(lines: list[str]):
         time = int(''.join(t for t in lines[0].split(':')[1].split()))
         distance = int(''.join(t for t in lines[1].split(':')[1].split()))
         puzzle = Puzzle([Race(time, distance)])
         return puzzle
 
-    def error_margin(self):
+    def error_margin(self) -> int:
         return reduce(mul, (len(race.winning_range()) for race in self.races), 1)
 
 
