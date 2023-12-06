@@ -13,8 +13,8 @@ class Race(NamedTuple):
     def roots(self) -> Tuple[float, float]:
         # roots of c(t - c) = d => -t ± sqrt(t^2 - 4d)  / -2
         disc = sqrt(pow(self.time, 2) - (4 * self.distance))
-        root_a = (-self.time + disc) / -2
-        root_b = (-self.time - disc) / -2
+        root_a = (self.time - disc) / 2
+        root_b = (self.time + disc) / 2
         return (root_a, root_b)
 
     def winning_range(self) -> range:
