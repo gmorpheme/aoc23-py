@@ -3,12 +3,12 @@ from operator import mul
 
 TEST_INPUT = ['32T3K 765', 'T55J5 684', 'KK677 28', 'KTJJT 220', 'QQQJA 483']
 
-val_map_a = dict((v, k) for k, v in enumerate('23456789TJQKA'))
-val_map_b = dict((v, k) for k, v in enumerate('J23456789TQKA'))
+val_map_a = {v: k for k, v in enumerate('23456789TJQKA')}
+val_map_b = {v: k for k, v in enumerate('J23456789TQKA')}
 
 
 def type_key_a(text):
-    return list(reversed(sorted(Counter(text).values())))
+    return tuple(sorted(Counter(text).values(), reverse=True))
 
 
 def boost(text):
@@ -26,7 +26,7 @@ def type_key_b(text):
 
 
 class Hand:
-    def __init__(self, text, val_map=val_map_a, type_key_fn=type_key_a):
+    def __init__(self, text, val_map, type_key_fn):
         self.text = text
         self.tie_break_vals = [val_map[c] for c in self.text]
         self.type_key = type_key_fn(self.text)
@@ -38,25 +38,23 @@ class Hand:
         )
 
     @staticmethod
+    def a(text):
+        return Hand(text, val_map=val_map_a, type_key_fn=type_key_a)
+
+    @staticmethod
     def b(text):
         return Hand(text, val_map=val_map_b, type_key_fn=type_key_b)
 
     def __eq__(self, other):
         return self.text == other.text
 
-    def __repr__(self):
-        return f'{self.text}'
-
-    def __hash__(self):
-        return hash(self.text)
-
 
 def parse_a(lines):
-    return [(Hand(h), int(b)) for h, b in map(lambda l: l.split(), lines)]
+    return [(Hand.a(h), int(b)) for h, b in (l.split() for l in lines)]
 
 
 def parse_b(lines):
-    return [(Hand.b(h), int(b)) for h, b in map(lambda l: l.split(), lines)]
+    return [(Hand.b(h), int(b)) for h, b in (l.split() for l in lines)]
 
 
 def day7a(lines):
