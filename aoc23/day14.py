@@ -53,10 +53,6 @@ CYCLE_3 = [
     '#.OOO#...O',
 ]
 
-class Pos(NamedTuple):
-    x: int
-    y: int
-
 def tilt(items):
     balls = gaps = 0
     output = []
@@ -164,6 +160,7 @@ def day14a(lines):
 def day14b(lines):
     """
     >>> day14b(TEST_INPUT)
+    64
     """
     return Puzzle(lines).run(1_000_000_000).evaluate_load()
 
