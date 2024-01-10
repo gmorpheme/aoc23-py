@@ -100,7 +100,6 @@ def day15b(steps):
 def main():
     with open('aoc23/data/day15input.txt') as fd:
         steps = [s.strip() for s in fd.read().split(',')]
-        print(len(steps))
     print(f'Day 15a: {day15a(steps)}')
     print(f'Day 15b: {day15b(steps)}')
 

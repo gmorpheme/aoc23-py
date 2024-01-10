@@ -268,11 +268,13 @@ def day12a(lines):
     return sum(len(SimpleRow.parse(line).solutions()) for line in lines)
 
 
-def day12b(lines, n = 1_000_000):
+def day12b(lines):
     """
     >>> day12b(TEST_INPUT)
     525152
     """
+    # This one takes a long time but does return... there were better
+    # ways to do it
     return sum(UnfoldedRow.parse(line).possibilities() for line in lines)
 
 

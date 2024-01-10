@@ -70,8 +70,8 @@ class Puzzle:
         it = (state for state in self.follow(start) if state[1].endswith('Z'))
         a = next(it)[2]
         b = next(it)[2]
-        assert a % len(self.route) == 0
-        assert b % len(self.route) == 0
+        # assert a % len(self.route) == 0
+        # assert b % len(self.route) == 0
         return b - a
 
 

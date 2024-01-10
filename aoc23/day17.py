@@ -67,14 +67,14 @@ class Plan:
     def in_bounds(self, pos):
         return 0 <= pos.x < self.width and 0 <= pos.y < self.height
 
-    def a_star(self, min_travel=1, max_travel=3):
+    def a_star(self, min_travel=1, max_travel=3, show_progress=False):
         route0 = Route.blank(self)
         frontier = route0.options(Pos(0,0), min_travel=min_travel, max_travel=max_travel)
         heapq.heapify(frontier)
         seen = {}
         for n in count(start=1):
             route = heapq.heappop(frontier)
-            if n % 10000 == 0:
+            if show_progress and n % 10000 == 0:
                 print(f'Frontier size: {len(frontier)}')
                 print(f'Best: {route.estimated_cost}')
             if route.pos == self.end:

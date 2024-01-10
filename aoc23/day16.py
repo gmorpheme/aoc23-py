@@ -157,6 +157,7 @@ def day16a(lines):
 def day16b(lines):
     """
     >>> day16b(TEST_INPUT)
+    51
     """
     p = Puzzle(lines)
     tracks = {}
@@ -178,10 +179,9 @@ def day16b(lines):
 def main():
     with open('aoc23/data/day16input.txt') as fd:
         lines = list(fd)
-        print(len(lines))
     print(f'Day 16a: {day16a(lines)}')
     print(f'Day 16b: {day16b(lines)}')
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
